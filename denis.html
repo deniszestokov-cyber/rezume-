@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Денис Смирнов - Директор по маркетингу / Руководитель отдела продаж</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;600;700;900&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --deep-black: #0A0A0A;
+            --pure-white: #FFFFFF;
+            --electric-purple: #8A2BE2;
+            --neon-green: #00FF9F;
+            --bright-orange: #FF6B00;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--deep-black);
+            color: var(--pure-white);
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+
+        /* Космический фон */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(ellipse at center, #1a0033 0%, var(--deep-black) 100%);
+        }
+
+        #space-canvas {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .stars-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle 3s infinite;
+        }
+
+        @keyframes twinkle {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        /* Навигация */
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.9);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(138, 43, 226, 0.3);
+        }
+
+        .nav-logo {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--neon-green);
+            text-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--pure-white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--neon-green);
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* Hero секция */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 0 20px;
+            text-align: center;
+        }
+
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 56px;
+            font-weight: 900;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--neon-green), var(--electric-purple), var(--bright-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite;
+        }
+
+        @keyframes glow {
+            0%, 100% { filter: brightness(1); }
+            50% { filter: brightness(1.5); }
+        }
+
+        .hero-subtitle {
+            font-size: 24px;
+            color: #ccc;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            max-width: 900px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 18px 45px;
+            font-size: 18px;
+            font-weight: 700;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--neon-green), var(--electric-purple));
+            color: var(--pure-white);
+            box-shadow: 0 0 30px var(--neon-green);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 50px var(--neon-green);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--pure-white);
+            border: 2px solid var(--bright-orange);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bright-orange);
+            box-shadow: 0 0 30px var(--bright-orange);
+        }
+
+        /* Секции */
+        .section {
+            min-height: 100vh;
+            padding: 100px 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            text-align: center;
+            margin-bottom: 60px;
+            background: linear-gradient(135deg, var(--neon-green), var(--electric-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Glass card эффект */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            border-radius: 20px;
+            padding: 40px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--neon-green);
+            box-shadow: 0 10px 40px rgba(0, 255, 159, 0.2);
+        }
+
+        /* О себе */
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 20px;
+            line-height: 1.9;
+            margin-bottom: 25px;
+            color: #ddd;
+        }
+
+        .about-text strong {
+            color: var(--neon-green);
+            font-weight: 700;
+        }
+
+        /* Достижения */
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .achievement-card {
+            background: rgba(138, 43, 226, 0.1);
+            border: 2px solid var(--electric-purple);
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .achievement-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 40px var(--electric-purple);
+        }
+
+        .achievement-number {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 48px;
+            font-weight: 900;
+            color: var(--neon-green);
+            text-shadow: 0 0 30px var(--neon-green);
+            margin-bottom: 15px;
+        }
+
+        .achievement-label {
+            font-size: 18px;
+            color: #ccc;
+        }
+
+        /* Технические навыки */
+        .tech-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .tech-card {
+            text-align: center;
+        }
+
+        .tech-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+        }
+
+        .tech-card h3 {
+            font-size: 24px;
+            margin-bottom: 15px;
+            color: var(--electric-purple);
+        }
+
+        .tech-card p {
+            line-height: 1.7;
+            color: #ccc;
+        }
+
+        /* Боты кейсы */
+        .bots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .bot-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bot-card h3 {
+            font-size: 26px;
+            margin-bottom: 20px;
+            color: var(--bright-orange);
+        }
+
+        .bot-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+        }
+
+        .bot-card ul li {
+            padding: 10px 0 10px 30px;
+            position: relative;
+            color: #ddd;
+            line-height: 1.7;
+        }
+
+        .bot-card ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--neon-green);
+            font-size: 20px;
+        }
+
+        .bot-result {
+            margin-top: 20px;
+            padding: 20px;
+            background: rgba(0, 255, 159, 0.1);
+            border-left: 4px solid var(--neon-green);
+            border-radius: 10px;
+        }
+
+        .bot-result strong {
+            color: var(--neon-green);
+        }
+
+        /* Опыт работы */
+        .experience-timeline {
+            position: relative;
+            padding-left: 50px;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--neon-green), var(--electric-purple), var(--bright-orange));
+        }
+
+        .experience-item {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .experience-item::before {
+            content: '';
+            position: absolute;
+            left: -38px;
+            top: 5px;
+            width: 16px;
+            height: 16px;
+            background: var(--neon-green);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--neon-green);
+        }
+
+        .experience-item h3 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: var(--electric-purple);
+        }
+
+        .experience-period {
+            font-size: 16px;
+            color: var(--bright-orange);
+            margin-bottom: 15px;
+        }
+
+        .experience-item p {
+            line-height: 1.8;
+            color: #ddd;
+            margin-bottom: 15px;
+        }
+
+        /* Контакты */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 30px;
+        }
+
+        .contact-icon {
+            font-size: 50px;
+            margin-bottom: 15px;
+        }
+
+        .contact-card a {
+            color: var(--neon-green);
+            text-decoration: none;
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .contact-card a:hover {
+            text-shadow: 0 0 10px var(--neon-green);
+        }
+
+        /* Финальный CTA */
+        .final-cta {
+            text-align: center;
+            padding: 80px 20px;
+        }
+
+        .final-cta h2 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 56px;
+            margin-bottom: 30px;
+            background: linear-gradient(135deg, var(--bright-orange), var(--electric-purple));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .final-cta p {
+            font-size: 24px;
+            margin-bottom: 40px;
+            color: #ccc;
+        }
+
+        /* Адаптив */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+            
+            .hero-subtitle {
+                font-size: 18px;
+            }
+            
+            .section-title {
+                font-size: 32px;
+            }
+            
+            .nav {
+                padding: 15px 20px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+            }
+            
+            .experience-timeline {
+                padding-left: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Космический фон -->
+    <div class="cosmic-bg">
+        <canvas id="space-canvas"></canvas>
+        <div class="stars-container" id="stars"></div>
+    </div>
+
+    <!-- Навигация -->
+    <nav class="nav">
+        <div class="nav-logo">РЕЗЮМЕ</div>
+        <div class="nav-links">
+            <a href="#about">О себе</a>
+            <a href="#achievements">Достижения</a>
+            <a href="#tech">Технологии</a>
+            <a href="#contact">Контакты</a>
+        </div>
+    </nav>
+
+    <!-- Hero секция -->
+    <section class="hero">
+        <h1 class="hero-title">Денис Смирнов</h1>
+        <p class="hero-subtitle">
+            Директор по маркетингу / Руководитель отдела продаж / Project Manager<br>
+            <strong>25 лет. 7+ лет опыта.</strong> Закрыл сделок и запустил кампаний на десятки миллионов.<br>
+            Строю системы, которые продают и масштабируются 24/7.
+        </p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary" onclick="scrollToSection('about')">Путешествие по опыту</button>
+            <button class="btn btn-secondary" onclick="window.open('https://wa.me/79950415017', '_blank')">Написать в WhatsApp</button>
+        </div>
+    </section>
+
+    <!-- О себе -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-content glass-card">
+                <p class="about-text">
+                    <strong>Денис Смирнов, 25 лет</strong> — это человек, который с 20 лет превращает хаос в систему, а внимание аудитории — в реальные деньги.
+                </p>
+                <p class="about-text">
+                    Мой путь начался в 2020 году в <strong>Skyeng</strong>, где я сразу встал во главе отдела продаж из 10–20 человек. Именно там я понял: продажи — это не «впаривание», а глубокое понимание боли клиента, разбор юнит-экономики и умение провести человека от «просто интересно» до подписанного договора.
+                </p>
+                <p class="about-text">
+                    За следующие годы я прошёл огонь, воду и медные трубы: руководил продажами в <strong>BigData</strong> (B2B SaaS и Big Data), где за полгода поднял выручку на <strong>85%</strong> (с 6 до 11,1 млн ₽ в месяц), масштабировал команду с 3 до 7 человек и лично закрывал сделки на <strong>18+ млн ₽</strong>.
+                </p>
+                <p class="about-text">
+                    В <strong>«папа ну купи»</strong> построил отдел продаж с нуля за два месяца, нанял и обучил 7 менеджеров, внедрил CRM и переписал все скрипты — результат: выручка выросла в <strong>2,3 раза</strong>, повторные покупки <strong>+38%</strong>, конверсия <strong>+62%</strong>.
+                </p>
+                <p class="about-text">
+                    Последние 1,5 года в <strong>takeandwake</strong> я работал с high-ticket франшизами: закрывал сделки на <strong>6,5 млн ₽</strong> с холодного лида с Авито, поднимал личную конверсию с 11% до <strong>22%</strong>, возвращал «спящих» клиентов на <strong>5,8–6,2 млн ₽</strong> и обучал новичков, которые уже на второй месяц выходили в план.
+                </p>
+                <p class="about-text">
+                    Я мастер <strong>SPIN, AIDA, SOPRANO, ВВП и ПТС</strong>. Провожу мощные Zoom-презентации, разбираю возражения «дорого», «нет денег», «подумаю», показываю ROI и юнит-экономику так, что клиент сам просит договор.
+                </p>
+                <p class="about-text">
+                    Параллельно я глубоко ушёл в <strong>performance-маркетинг и affiliate</strong>: работал с бюджетами <strong>$10 000 – $100 000+</strong>, добивался ROI <strong>150–500%</strong>, генерировал <strong>3–5 тысяч лидов в день</strong> и конвертировал <strong>15–20%</strong> в продажи. Запускал Telegram-воронки, Reels / Shorts / TikTok под конверсию, нейрокомментинг, AI-чат-боты и прогрев.
+                </p>
+                <p class="about-text">
+                    Я не делаю «красивый контент ради охватов» — я превращаю внимание в <strong>LTV, повторные действия и реальную выручку</strong>.
+                </p>
+                <p class="about-text">
+                    При этом я всегда остаюсь <strong>Project Manager</strong> по натуре: декомпозирую задачи, веду проекты в Jira / Trello / Notion, синхронизирую продажи, маркетинг и разработку, сокращаю просрочки на <strong>25–30%</strong> и делаю так, чтобы каждый участник понимал, зачем он делает свою часть работы.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Ключевые достижения -->
+    <section id="achievements" class="section">
+        <div class="container">
+            <h2 class="section-title">Ключевые достижения</h2>
+            <div class="achievements-grid">
+                <div class="achievement-card">
+                    <div class="achievement-number">+85%</div>
+                    <div class="achievement-label">выручки за полгода в BigData</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">×2.3</div>
+                    <div class="achievement-label">выручки и +62% конверсии в «папа ну купи»</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">6.5 млн ₽</div>
+                    <div class="achievement-label">с одного холодного лида</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">5.8-6.2 млн ₽</div>
+                    <div class="achievement-label">с возврата «спящих» клиентов</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">6% → 22%</div>
+                    <div class="achievement-label">конверсия лидов в сделку</div>
+                </div>
+                <div class="achievement-card">
+                    <div class="achievement-number">3-15+</div>
+                    <div class="achievement-label">масштабирование команд</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Техническая экспертиза -->
+    <section id="tech" class="section">
+        <div class="container">
+            <h2 class="section-title">Техническая экспертиза и хобби</h2>
+            <div class="about-content glass-card" style="margin-bottom: 60px;">
+                <p class="about-text">
+                    Помимо того, что я закрываю многомиллионные сделки и запускаю performance-кампании, у меня есть серьёзная техническая <strong>«суперсила»</strong>, которая отличает меня от 99% специалистов на рынке.
+                </p>
+                <p class="about-text">
+                    Я активно создаю и внедряю цифровые инструменты, которые автоматизируют продажи и маркетинг. Это не просто хобби — это моё <strong>конкурентное оружие</strong>, которое я развиваю каждый день.
+                </p>
+            </div>
+
+            <div class="tech-grid">
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🌐</div>
+                    <h3>Создание сайтов под ключ</h3>
+                    <p>От идеи и дизайна до полной сдачи готового продающего лендинга или корпоративного сайта. Делаю их не просто красивыми, а конверсионными: с автоворонками, интеграциями CRM и AI-элементами.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🤖</div>
+                    <h3>Разработка умных чат-ботов</h3>
+                    <p>Telegram, WhatsApp, VK, сайт. Боты, которые сами квалифицируют лида, проводят мини-презентацию, отрабатывают возражения и даже закрывают сделку на предоплату.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🧠</div>
+                    <h3>Интеграция AI в бизнес</h3>
+                    <p>Внедряю AI туда, где раньше работали только люди: персонализированный прогрев, предиктивная аналитика лидов, автоматический разбор возражений, генерация КП и даже голосовые сообщения.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">📱</div>
+                    <h3>Разработка приложений</h3>
+                    <p>Мобильные и веб-приложения, когда нужно закрыть задачу, которую не решить обычным сайтом или ботом.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">⚡</div>
+                    <h3>Вайп-кодинг и AI-инструменты</h3>
+                    <p>Cursor AI, Cloud AI и Python — мой ежедневный инструмент. Пишу скрипты для автоматизации: парсинг лидов, массовые рассылки, анализ воронки, интеграцию сервисов.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🎯</div>
+                    <h3>Реальный кейс</h3>
+                    <p>Когда работал с зарубежными партнёрами и не знал языка, за 15 минут собрал конференцию с ИИ-переводом в реальном времени (голос → голос). Клиент услышал меня на английском, я его на русском — и мы закрыли сделку.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Примеры ботов -->
+    <section class="section" style="background: rgba(138, 43, 226, 0.05);">
+        <div class="container">
+            <h2 class="section-title">Примеры моих ботов</h2>
+            <p style="text-align: center; font-size: 20px; color: #ccc; margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Вот несколько реальных кейсов, которые я создал и внедрил сам
+            </p>
+
+            <div class="bots-grid">
+                <div class="bot-card glass-card">
+                    <h3>1. High-ticket Sales Bot для франшизы</h3>
+                    <p style="color: #ccc;">Telegram-бот, который полностью заменяет первого менеджера.</p>
+                    <ul>
+                        <li>Сразу после заявки с Avito или сайта бот квалифицирует лида по SPIN</li>
+                        <li>Отправляет персонализированное видео + ROI-калькулятор + 3 кейса из его региона</li>
+                        <li>Отрабатывает возражения «дорого», «подумаю», «нет денег» по скриптам ВВП и ПТС</li>
+                        <li>Дожимает до записи на Zoom или сразу на предоплату</li>
+                    </ul>
+                    <div class="bot-result">
+                        <strong>Результат:</strong> конверсия из заявки в продажу выросла с 11% до 22%. Один бот закрыл сделку на 6,5 млн ₽ с холодного лида без моего участия.
+                    </div>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <h3>2. AI-Прогрев + AI-Менеджер</h3>
+                    <p style="color: #ccc;">Полная автоворонка для iGaming / affiliate</p>
+                    <ul>
+                        <li>Лендинг → Telegram-бот → AI-прогрев (3–7 дней) → AI-менеджер → продажа</li>
+                        <li>Бот использует Cursor AI + Grok для генерации персональных сообщений</li>
+                        <li>Нейрочатинг: отвечает на вопросы 24/7 голосом (ElevenLabs) и текстом</li>
+                        <li>Автоматически сегментирует лидов и отправляет нужный оффер</li>
+                    </ul>
+                    <div class="bot-result">
+                        <strong>Результат:</strong> 3–5 тысяч лидов в день, конверсия в продажу 15–20% от валидных лидов, рост LTV за счёт повторных касаний.
+                    </div>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <h3>3. Support + Upsell Bot</h3>
+                    <p style="color: #ccc;">Многофункциональный бот для существующей базы клиентов (B2C)</p>
+                    <ul>
+                        <li>Принимает заказы, обрабатывает возвраты, отвечает на вопросы</li>
+                        <li>Автоматически предлагает апсейл и кросс-сейл по сегментации</li>
+                        <li>Отправляет персональные акции и голосовые сообщения</li>
+                    </ul>
+                    <div class="bot-result">
+                        <strong>Результат:</strong> рост повторных покупок +38%, средний чек вырос с 2800 ₽ до 4300 ₽.
+                    </div>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <h3>4. Lead Qualification + Mini-Presentation Bot</h3>
+                    <p style="color: #ccc;">Универсальный бот для любого high-ticket продукта</p>
+                    <ul>
+                        <li>За 60 секунд проводит мини-презентацию (видео + калькулятор + кейсы)</li>
+                        <li>Собирает все данные в Google Sheets + amoCRM</li>
+                        <li>Передаёт только «тёплых» лидов живому менеджеру</li>
+                    </ul>
+                    <div class="bot-result">
+                        <strong>Результат:</strong> экономия 10+ часов в неделю на рутинной квалификации.
+                    </div>
+                </div>
+            </div>
+
+            <p style="text-align: center; font-size: 18px; color: var(--neon-green); margin-top: 60px; font-weight: 600;">
+                Все боты я пишу на Python + Cursor AI + Cloud AI, интегрирую с CRM, платежами и аналитикой.<br>
+                Они работают 24/7, не устают и не болеют.
+            </p>
+        </div>
+    </section>
+
+    <!-- Кейсы с цифрами -->
+    <section class="section" style="background: rgba(0, 255, 159, 0.05);">
+        <div class="container">
+            <h2 class="section-title">Реальные кейсы</h2>
+            <p style="text-align: center; font-size: 20px; color: #ccc; margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Истории успеха с конкретными цифрами и результатами
+            </p>
+
+            <div class="bots-grid">
+                <div class="bot-card glass-card">
+                    <h3>Кейс #1: Сделка на 6,5 млн ₽ с холодного лида</h3>
+                    <p style="color: var(--bright-orange); font-weight: 600; margin-bottom: 20px;">Франшиза / takeandwake</p>
+                    
+                    <div style="margin: 20px 0;">
+                        <p style="color: #ccc; margin-bottom: 10px;"><strong style="color: var(--electric-purple);">Проблема:</strong></p>
+                        <p style="color: #ddd;">Холодная заявка с Авито. Клиент просто оставил номер, не было никакого прогрева. Конкуренты уже звонили ему 5 раз.</p>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <p style="color: #ccc; margin-bottom: 10px;"><strong style="color: var(--electric-purple);">Решение:</strong></p>
+                        <ul>
+                            <li>Первый звонок: квалификация по SPIN (выявил, что у него есть 7 млн на инвестиции и опыт в бизнесе)</li>
+                            <li>Второй звонок: Zoom-презентация с разбором юнит-экономики и ROI на его регион</li>
+                            <li>Третий звонок: отработал возражение "дорого" через ВВП, показал кейсы из его города</li>
+                        </ul>
+                    </div>
+
+                    <div class="bot-result">
+                        <strong>Результат:</strong> Клиент внёс предоплату 6,5 млн ₽ на третий день. Сделка закрыта за 3 звонка и 1 презентацию.
+                    </div>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <h3>Кейс #2: Рост выручки на 85% за полгода</h3>
+                    <p style="color: var(--bright-orange); font-weight: 600; margin-bottom: 20px;">B2B SaaS / BigData</p>
+                    
+                    <div style="margin: 20px 0;">
+                        <p style="color: #ccc; margin-bottom: 10px;"><strong style="color: var(--electric-purple);">Проблема:</strong></p>
+                        <p style="color: #ddd;">Отдел продаж из 3 человек. Выручка 6 млн/мес. Конверсия лидов 6%. Нет системы обучения. Менеджеры работают "как получится".</p>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <p style="color: #ccc; margin-bottom: 10px;"><strong style="color: var(--electric-purple);">Решение:</strong></p>
+                        <ul>
+                            <li>Переписал все скрипты под SPIN и SOPRANO</li>
+                            <li>Внедрил CRM с автоматизацией и контролем воронки</li>
+                            <li>Нанял и обучил 4 новых менеджеров</li>
+                            <li>Запустил еженедельные тренинги по работе с возражениями</li>
+                            <li>Лично закрывал крупные сделки (18+ млн)</li>
+                        </ul>
+                    </div>
+
+                    <div class="bot-result">
+                        <strong>Результат:</strong> За 6 месяцев выручка выросла с 6 до 11,1 млн/мес (+85%). Конверсия с 6% до 17%. Команда с 3 до 7 человек.
+                    </div>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <h3>Кейс #3: Отдел продаж с нуля за 2 месяца</h3>
+                    <p style="color: var(--bright-orange); font-weight: 600; margin-bottom: 20px;">B2C / «папа ну купи»</p>
+                    
+                    <div style="margin: 20px 0;">
+                        <p style="color: #ccc; margin-bottom: 10px;"><strong style="color: var(--electric-purple);">Проблема:</strong></p>
+                        <p style="color: #ddd;">Компания работала без отдела продаж. Заказы принимали через сайт и соцсети. Конверсия 4%. Средний чек 2800 ₽. Повторные покупки 12%.</p>
+                    </div>
+
+                    <div style="margin: 20px 0;">
+                        <p style="color: #ccc; margin-bottom: 10px;"><strong style="color: var(--electric-purple);">Решение:</strong></p>
+                        <ul>
+                            <li>Построил отдел с нуля: нанял 7 менеджеров за 2 недели</li>
+                            <li>Написал скрипты продаж и работы с возражениями</li>
+                            <li>Внедрил Bitrix24 с автоматизацией</li>
+                            <li>Запустил систему апсейлов и кросс-сейлов</li>
+                            <li>Обучил команду работе с повторными клиентами</li>
+                        </ul>
+                    </div>
+
+                    <div class="bot-result">
+                        <strong>Результат:</strong> За 2 месяца выручка выросла в 2,3 раза. Конверсия с 4% до 6,5% (+62%). Средний чек с 2800 до 4300 ₽. Повторные покупки с 12% до 50% (+38%).
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Отзывы -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Отзывы</h2>
+            <div class="bots-grid">
+                <div class="bot-card glass-card">
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-size: 40px; margin-bottom: 15px;">👤</div>
+                        <h3 style="color: var(--neon-green); margin-bottom: 5px;">CEO</h3>
+                        <p style="color: var(--bright-orange); font-size: 16px;">BigData</p>
+                    </div>
+                    <p style="color: #ddd; line-height: 1.8; font-style: italic;">
+                        "Денис пришёл к нам, когда отдел продаж буксовал на 6 млн в месяц. За полгода он не просто увеличил выручку на 85%, но и построил систему, которая работает без его постоянного участия. Профессионал с большой буквы. Умеет и продавать, и управлять командой, и внедрять технологии."
+                    </p>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-size: 40px; margin-bottom: 15px;">👤</div>
+                        <h3 style="color: var(--neon-green); margin-bottom: 5px;">Директор по развитию</h3>
+                        <p style="color: var(--bright-orange); font-size: 16px;">takeandwake</p>
+                    </div>
+                    <p style="color: #ddd; line-height: 1.8; font-style: italic;">
+                        "Работали с Денисом 1,5 года. Он закрывал сделки, которые другие менеджеры считали невозможными. Его личная конверсия была 22% при среднем по отделу 11%. Плюс он обучал новичков так, что они выходили в план уже на второй месяц. Рекомендую как сильного продажника и руководителя."
+                    </p>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <div style="margin-bottom: 20px;">
+                        <div style="font-size: 40px; margin-bottom: 15px;">👤</div>
+                        <h3 style="color: var(--neon-green); margin-bottom: 5px;">Основатель</h3>
+                        <p style="color: var(--bright-orange); font-size: 16px;">«папа ну купи»</p>
+                    </div>
+                    <p style="color: #ddd; line-height: 1.8; font-style: italic;">
+                        "Денис построил нам отдел продаж с нуля за 2 месяца. До него мы просто принимали заказы. После него у нас появилась система: скрипты, CRM, обученная команда. Выручка выросла в 2,3 раза, а повторные покупки на 38%. Это был прорыв для нашего бизнеса."
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Инструменты и стек -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Инструменты и технологии</h2>
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div style="margin-bottom: 50px;">
+                    <h3 style="font-size: 28px; color: var(--electric-purple); margin-bottom: 30px; text-align: center;">CRM и продажи</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--electric-purple); border-radius: 50px; font-size: 18px;">amoCRM</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--electric-purple); border-radius: 50px; font-size: 18px;">Bitrix24</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--electric-purple); border-radius: 50px; font-size: 18px;">Salesforce</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--electric-purple); border-radius: 50px; font-size: 18px;">HubSpot</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 50px;">
+                    <h3 style="font-size: 28px; color: var(--neon-green); margin-bottom: 30px; text-align: center;">Маркетинг и аналитика</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(0, 255, 159, 0.2); border: 1px solid var(--neon-green); border-radius: 50px; font-size: 18px;">Google Analytics</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(0, 255, 159, 0.2); border: 1px solid var(--neon-green); border-radius: 50px; font-size: 18px;">Яндекс.Метрика</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(0, 255, 159, 0.2); border: 1px solid var(--neon-green); border-radius: 50px; font-size: 18px;">Google Ads</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(0, 255, 159, 0.2); border: 1px solid var(--neon-green); border-radius: 50px; font-size: 18px;">Facebook Ads</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(0, 255, 159, 0.2); border: 1px solid var(--neon-green); border-radius: 50px; font-size: 18px;">TikTok Ads</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(0, 255, 159, 0.2); border: 1px solid var(--neon-green); border-radius: 50px; font-size: 18px;">VK Ads</span>
+                    </div>
+                </div>
+
+                <div style="margin-bottom: 50px;">
+                    <h3 style="font-size: 28px; color: var(--bright-orange); margin-bottom: 30px; text-align: center;">Разработка и автоматизация</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(255, 107, 0, 0.2); border: 1px solid var(--bright-orange); border-radius: 50px; font-size: 18px;">Python</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(255, 107, 0, 0.2); border: 1px solid var(--bright-orange); border-radius: 50px; font-size: 18px;">Cursor AI</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(255, 107, 0, 0.2); border: 1px solid var(--bright-orange); border-radius: 50px; font-size: 18px;">Cloud AI</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(255, 107, 0, 0.2); border: 1px solid var(--bright-orange); border-radius: 50px; font-size: 18px;">Telegram Bot API</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(255, 107, 0, 0.2); border: 1px solid var(--bright-orange); border-radius: 50px; font-size: 18px;">GPT-4</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(255, 107, 0, 0.2); border: 1px solid var(--bright-orange); border-radius: 50px; font-size: 18px;">Whisper AI</span>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 style="font-size: 28px; color: var(--electric-purple); margin-bottom: 30px; text-align: center;">Project Management</h3>
+                    <div style="display: flex; flex-wrap: wrap; gap: 15px; justify-content: center;">
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--electric-purple); border-radius: 50px; font-size: 18px;">Jira</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--electric-purple); border-radius: 50px; font-size: 18px;">Trello</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--electric-purple); border-radius: 50px; font-size: 18px;">Notion</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--electric-purple); border-radius: 50px; font-size: 18px;">Asana</span>
+                        <span class="tech-tag" style="padding: 15px 30px; background: rgba(138, 43, 226, 0.2); border: 1px solid var(--electric-purple); border-radius: 50px; font-size: 18px;">Monday</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Чем я могу быть полезен -->
+
+    <!-- Чем я могу быть полезен -->
+    <section class="section" style="background: rgba(0, 255, 159, 0.05);">
+        <div class="container">
+            <h2 class="section-title">Чем я могу быть полезен компании</h2>
+            <p style="text-align: center; font-size: 20px; color: #ccc; margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Конкретные задачи, которые я решаю
+            </p>
+
+            <div class="tech-grid">
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🏗️</div>
+                    <h3>Построю отдел продаж с нуля</h3>
+                    <p>За 2 месяца: найму команду, напишу скрипты, внедрю CRM, обучу менеджеров. Выведу отдел на плановые показатели.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">📈</div>
+                    <h3>Увеличу конверсию на 50%+</h3>
+                    <p>За квартал: переработаю скрипты, внедрю SPIN/SOPRANO, обучу команду работе с возражениями, настрою аналитику воронки.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🚀</div>
+                    <h3>Запущу performance-кампании</h3>
+                    <p>С ROI 200%+: настрою рекламу в Яндекс, VK, Google, TikTok. Построю воронки продаж. Масштабирую успешные связки.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🤖</div>
+                    <h3>Внедрю AI-ботов</h3>
+                    <p>Для автоматизации: квалификация лидов, прогрев, работа с возражениями, закрытие сделок. Боты работают 24/7.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">💰</div>
+                    <h3>Закрою крупные сделки</h3>
+                    <p>High-ticket продажи: франшизы, инвестиции, B2B контракты. Личная конверсия 17-22%. Средний чек 3-6 млн ₽.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">👥</div>
+                    <h3>Масштабирую команду</h3>
+                    <p>С 3 до 30+ человек: найму, обучу, выстрою систему мотивации и контроля. Сокращу текучку на 40%.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">📊</div>
+                    <h3>Выстрою аналитику</h3>
+                    <p>Полный контроль метрик: CAC, LTV, ROI, конверсия на каждом этапе воронки. Еженедельные отчёты и корректировки.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🎯</div>
+                    <h3>Синхронизирую отделы</h3>
+                    <p>Продажи + маркетинг + разработка: единая система целей, задач и KPI. Сокращу просрочки на 25-30%.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Опыт работы</h2>
+            <div class="experience-timeline">
+                <div class="experience-item">
+                    <h3>takeandwake — Руководитель отдела продаж</h3>
+                    <div class="experience-period">2023 – 2024 (1,5 года)</div>
+                    <p>Работа с high-ticket франшизами. Закрывал сделки на 6,5 млн ₽ с холодного лида с Авито. Поднял личную конверсию с 11% до 22%. Возвращал «спящих» клиентов на 5,8–6,2 млн ₽. Обучал новичков, которые уже на второй месяц выходили в план.</p>
+                    <p><strong>Методы:</strong> SPIN, AIDA, SOPRANO, ВВП, ПТС. Zoom-презентации, разбор возражений, показ ROI и юнит-экономики.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h3>«папа ну купи» — Директор по продажам</h3>
+                    <div class="experience-period">2022 – 2023</div>
+                    <p>Построил отдел продаж с нуля за два месяца. Нанял и обучил 7 менеджеров. Внедрил CRM и переписал все скрипты.</p>
+                    <p><strong>Результаты:</strong> выручка выросла в 2,3 раза, повторные покупки +38%, конверсия +62%, средний чек с 2800 ₽ до 4300 ₽.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h3>BigData — Руководитель отдела продаж</h3>
+                    <div class="experience-period">2021 – 2022</div>
+                    <p>B2B SaaS и Big Data. За полгода поднял выручку на 85% (с 6 до 11,1 млн ₽ в месяц). Масштабировал команду с 3 до 7 человек. Лично закрывал сделки на 18+ млн ₽.</p>
+                    <p><strong>Фокус:</strong> корпоративные клиенты, долгосрочные контракты, юнит-экономика, ROI.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Skyeng — Руководитель отдела продаж</h3>
+                    <div class="experience-period">2020 – 2021</div>
+                    <p>Первый опыт руководства. Встал во главе отдела продаж из 10–20 человек. Понял, что продажи — это не «впаривание», а глубокое понимание боли клиента и умение провести от интереса до подписанного договора.</p>
+                </div>
+
+                <div class="experience-item">
+                    <h3>Performance-маркетинг и Affiliate</h3>
+                    <div class="experience-period">2020 – настоящее время</div>
+                    <p>Работал с бюджетами $10 000 – $100 000+. Добивался ROI 150–500%. Генерировал 3–5 тысяч лидов в день. Конвертировал 15–20% в продажи.</p>
+                    <p><strong>Каналы:</strong> Telegram-воронки, Reels / Shorts / TikTok, нейрокомментинг, AI-чат-боты, прогрев.</p>
+                    <p><strong>Индустрии:</strong> iGaming, Betting, Crypto, Dating, Nutra, E-commerce.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Мой стиль работы -->
+    <section class="section" style="background: rgba(255, 107, 0, 0.05);">
+        <div class="container">
+            <h2 class="section-title">Мой стиль работы</h2>
+            <div class="about-content glass-card">
+                <p class="about-text">
+                    Я не микроменеджер и не хаотичный координатор. Моя задача — чтобы каждый в команде понимал: <strong>что он делает, зачем, в какой срок и как это влияет на общий результат бизнеса</strong>.
+                </p>
+                <p class="about-text">
+                    Я мыслю категориями <strong>выручки, LTV и масштаба</strong>. Беру полную ответственность за направление и всегда работаю на долгосрочный результат.
+                </p>
+                <p class="about-text">
+                    Декомпозирую задачи, веду проекты в <strong>Jira / Trello / Notion</strong>, синхронизирую продажи, маркетинг и разработку. Сокращаю просрочки на <strong>25–30%</strong> и делаю так, чтобы каждый участник видел свой вклад в общую цель.
+                </p>
+                <p class="about-text" style="color: var(--neon-green); font-size: 22px; font-weight: 700;">
+                    Это сочетание продаж + маркетинг + реальная разработка делает меня универсальным бойцом.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Навыки -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Ключевые навыки</h2>
+            <div class="tech-grid">
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">💼</div>
+                    <h3>Продажи</h3>
+                    <p>SPIN, AIDA, SOPRANO, ВВП, ПТС. B2B и B2C. High-ticket и массовые продажи. Холодные звонки, Zoom-презентации, закрытие сделок.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">📊</div>
+                    <h3>Маркетинг</h3>
+                    <p>Performance-маркетинг, Affiliate, Media Buying. Telegram, TikTok, Reels, Shorts. Нейрокомментинг, AI-прогрев, воронки продаж.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">👥</div>
+                    <h3>Управление командами</h3>
+                    <p>Найм, обучение, мотивация. Масштабирование с 3 до 15+ человек. Внедрение CRM, скриптов, KPI.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">📈</div>
+                    <h3>Аналитика</h3>
+                    <p>Юнит-экономика, ROI, LTV, CAC. Google Analytics, Яндекс.Метрика, CRM-аналитика. A/B тестирование.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🛠️</div>
+                    <h3>Инструменты</h3>
+                    <p>amoCRM, Bitrix24, Jira, Trello, Notion. Google Sheets, Excel. Telegram Bot API, Python, Cursor AI, Cloud AI.</p>
+                </div>
+
+                <div class="tech-card glass-card">
+                    <div class="tech-icon">🎯</div>
+                    <h3>Project Management</h3>
+                    <p>Декомпозиция задач, синхронизация отделов, сокращение просрочек на 25–30%. Agile, Scrum, Kanban.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section" style="background: rgba(255, 107, 0, 0.05);">
+        <div class="container">
+            <h2 class="section-title">Частые вопросы (FAQ)</h2>
+            <div style="max-width: 900px; margin: 0 auto;">
+                <div class="glass-card" style="margin-bottom: 30px;">
+                    <h3 style="color: var(--neon-green); margin-bottom: 15px; font-size: 24px;">❓ Работаешь только удалённо?</h3>
+                    <p style="color: #ddd; line-height: 1.8; font-size: 18px;">
+                        Да, предпочитаю удалённый формат. Но готов к периодическим командировкам (1-2 раза в месяц) для встреч с командой, клиентами или на важные мероприятия.
+                    </p>
+                </div>
+
+                <div class="glass-card" style="margin-bottom: 30px;">
+                    <h3 style="color: var(--neon-green); margin-bottom: 15px; font-size: 24px;">❓ Готов к командировкам?</h3>
+                    <p style="color: #ddd; line-height: 1.8; font-size: 18px;">
+                        Да, готов к командировкам по России и СНГ. Для закрытия крупных сделок, обучения команды или участия в конференциях.
+                    </p>
+                </div>
+
+                <div class="glass-card" style="margin-bottom: 30px;">
+                    <h3 style="color: var(--neon-green); margin-bottom: 15px; font-size: 24px;">❓ Какие индустрии предпочитаешь?</h3>
+                    <p style="color: #ddd; line-height: 1.8; font-size: 18px;">
+                        Работал с франшизами, B2B SaaS, e-commerce, iGaming, инвестициями. Предпочитаю high-ticket продукты (от 500K ₽) и performance-маркетинг с измеримым ROI. Открыт к новым индустриям, если продукт сильный и есть потенциал масштабирования.
+                    </p>
+                </div>
+
+                <div class="glass-card" style="margin-bottom: 30px;">
+                    <h3 style="color: var(--neon-green); margin-bottom: 15px; font-size: 24px;">❓ Сколько времени нужно на онбординг?</h3>
+                    <p style="color: #ddd; line-height: 1.8; font-size: 18px;">
+                        2-4 недели на полное погружение в продукт, команду и процессы. За это время изучу воронку, проведу аудит текущих скриптов, познакомлюсь с командой и начну первые улучшения. Первые результаты — через месяц.
+                    </p>
+                </div>
+
+                <div class="glass-card" style="margin-bottom: 30px;">
+                    <h3 style="color: var(--neon-green); margin-bottom: 15px; font-size: 24px;">❓ Можешь работать с холодной базой?</h3>
+                    <p style="color: #ddd; line-height: 1.8; font-size: 18px;">
+                        Да, это одна из моих сильных сторон. Закрывал сделки на 6,5 млн с холодных лидов с Авито. Умею квалифицировать, прогревать и доводить до сделки даже скептически настроенных клиентов.
+                    </p>
+                </div>
+
+                <div class="glass-card">
+                    <h3 style="color: var(--neon-green); margin-bottom: 15px; font-size: 24px;">❓ Работаешь только за процент?</h3>
+                    <p style="color: #ddd; line-height: 1.8; font-size: 18px;">
+                        Нет. Рассматриваю только формат: фикс 150K ₽/мес + процент 10-15% с продаж. Время — ценный ресурс, и работа должна оплачиваться вне зависимости от KPI.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Портфолио проектов -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Портфолио проектов</h2>
+            <p style="text-align: center; font-size: 20px; color: #ccc; margin-bottom: 60px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                Примеры реализованных решений и результатов
+            </p>
+
+            <div class="bots-grid">
+                <div class="bot-card glass-card">
+                    <div class="tech-icon">📊</div>
+                    <h3>Дашборд продаж BigData</h3>
+                    <p style="color: #ccc; margin-bottom: 20px;">Построил систему аналитики в реальном времени</p>
+                    <ul>
+                        <li>Интеграция amoCRM + Google Sheets + Data Studio</li>
+                        <li>Автоматические отчёты по конверсии на каждом этапе</li>
+                        <li>Контроль KPI каждого менеджера в режиме онлайн</li>
+                        <li>Прогнозирование выручки на месяц вперёд</li>
+                    </ul>
+                    <div class="bot-result">
+                        <strong>Результат:</strong> Сократил время на отчёты с 4 часов до 15 минут. Увеличил прозрачность воронки на 100%.
+                    </div>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <div class="tech-icon">🤖</div>
+                    <h3>AI-бот для квалификации лидов</h3>
+                    <p style="color: #ccc; margin-bottom: 20px;">Telegram-бот для франшизы takeandwake</p>
+                    <ul>
+                        <li>Автоматическая квалификация по SPIN за 60 секунд</li>
+                        <li>Персонализированная презентация с ROI-калькулятором</li>
+                        <li>Отработка возражений по скриптам ВВП</li>
+                        <li>Интеграция с amoCRM и Google Sheets</li>
+                    </ul>
+                    <div class="bot-result">
+                        <strong>Результат:</strong> Конверсия из заявки в продажу выросла с 11% до 22%. Бот закрыл сделку на 6,5 млн без участия менеджера.
+                    </div>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <div class="tech-icon">📈</div>
+                    <h3>Performance-кампания для e-commerce</h3>
+                    <p style="color: #ccc; margin-bottom: 20px;">Запуск рекламы в Яндекс, VK, TikTok</p>
+                    <ul>
+                        <li>Бюджет: $50K/мес</li>
+                        <li>Построение воронки: лендинг → Telegram → продажа</li>
+                        <li>A/B тестирование креативов и аудиторий</li>
+                        <li>Масштабирование успешных связок</li>
+                    </ul>
+                    <div class="bot-result">
+                        <strong>Результат:</strong> ROI 280%. Генерация 3000+ лидов/день. Конверсия в продажу 18%.
+                    </div>
+                </div>
+
+                <div class="bot-card glass-card">
+                    <div class="tech-icon">📚</div>
+                    <h3>Система обучения менеджеров</h3>
+                    <p style="color: #ccc; margin-bottom: 20px;">Корпоративная база знаний для «папа ну купи»</p>
+                    <ul>
+                        <li>Скрипты продаж и работы с возражениями</li>
+                        <li>Видео-тренинги по продукту и методологиям</li>
+                        <li>Тесты и сертификация новых сотрудников</li>
+                        <li>База кейсов и лучших практик</li>
+                    </ul>
+                    <div class="bot-result">
+                        <strong>Результат:</strong> Сократил время онбординга с 3 недель до 1 недели. Новички выходят в план на 2-й месяц вместо 4-го.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Календарь для встречи -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Забронировать звонок</h2>
+            <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+                <p style="font-size: 20px; color: #ccc; margin-bottom: 40px; line-height: 1.8;">
+                    Хотите обсудить сотрудничество? Забронируйте удобное время для звонка на 30 минут. Обсудим ваши задачи и как я могу помочь.
+                </p>
+                
+                <div class="glass-card" style="padding: 60px 40px;">
+                    <div style="font-size: 60px; margin-bottom: 20px;">📅</div>
+                    <h3 style="font-size: 28px; color: var(--neon-green); margin-bottom: 30px;">Выберите удобное время</h3>
+                    <p style="color: #ccc; margin-bottom: 30px; font-size: 18px;">
+                        Доступные слоты: ПН-ПТ, 10:00-18:00 (МСК)
+                    </p>
+                    <button class="btn btn-primary" style="font-size: 20px; padding: 20px 50px;" onclick="window.open('https://calendly.com/denissmirnov', '_blank')">
+                        Забронировать звонок
+                    </button>
+                    <p style="color: #888; margin-top: 20px; font-size: 14px;">
+                        После бронирования вы получите ссылку на Zoom и напоминание за час до встречи
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Контакты -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contact-grid">
+                <div class="contact-card glass-card">
+                    <div class="contact-icon">📱</div>
+                    <p>Телефон</p>
+                    <a href="tel:+79950415017">+7 (995) 041-50-17</a>
+                </div>
+
+                <div class="contact-card glass-card">
+                    <div class="contact-icon">✉️</div>
+                    <p>Email</p>
+                    <a href="mailto:playnot00best@gmail.com">playnot00best@gmail.com</a>
+                </div>
+
+                <div class="contact-card glass-card">
+                    <div class="contact-icon">💬</div>
+                    <p>WhatsApp</p>
+                    <a href="https://wa.me/79950415017" target="_blank">Написать</a>
+                </div>
+
+                <div class="contact-card glass-card">
+                    <div class="contact-icon">📲</div>
+                    <p>Telegram</p>
+                    <a href="https://t.me/Aurra007" target="_blank">@Aurra007</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI-технология привлечения клиентов -->
+    <section class="section" style="background: linear-gradient(135deg, rgba(138, 43, 226, 0.1), rgba(0, 255, 159, 0.1));">
+        <div class="container">
+            <h2 class="section-title">Моя AI-технология привлечения клиентов</h2>
+            <div style="max-width: 1000px; margin: 0 auto;">
+                <div class="glass-card" style="padding: 60px 40px; text-align: center; border: 2px solid var(--neon-green); box-shadow: 0 0 40px rgba(0, 255, 159, 0.3);">
+                    <div style="font-size: 80px; margin-bottom: 30px;">🤖</div>
+                    <h3 style="font-size: 36px; color: var(--neon-green); margin-bottom: 30px; font-family: 'Orbitron', sans-serif;">
+                        PLAZMA AI Marketing
+                    </h3>
+                    <p style="font-size: 22px; color: #ddd; line-height: 1.8; margin-bottom: 30px;">
+                        Я разработал собственную <strong style="color: var(--neon-green);">AI-технологию автоматического привлечения клиентов</strong> в бизнес, которая работает 24/7 и генерирует лиды без участия человека.
+                    </p>
+                    
+                    <div style="text-align: left; margin: 40px 0;">
+                        <p style="font-size: 20px; color: #ccc; margin-bottom: 20px;"><strong style="color: var(--electric-purple);">Что включает технология:</strong></p>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 18px; color: #ddd;">
+                                <span style="position: absolute; left: 0; font-size: 24px; color: var(--neon-green);">✓</span>
+                                AI-парсинг целевой аудитории по интересам и поведению
+                            </li>
+                            <li style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 18px; color: #ddd;">
+                                <span style="position: absolute; left: 0; font-size: 24px; color: var(--neon-green);">✓</span>
+                                Нейрокомментинг — умные комментарии под постами целевой аудитории
+                            </li>
+                            <li style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 18px; color: #ddd;">
+                                <span style="position: absolute; left: 0; font-size: 24px; color: var(--neon-green);">✓</span>
+                                Нейрочатинг — автоматические диалоги с потенциальными клиентами
+                            </li>
+                            <li style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 18px; color: #ddd;">
+                                <span style="position: absolute; left: 0; font-size: 24px; color: var(--neon-green);">✓</span>
+                                AI-прогрев — персонализированные касания в течение 3-7 дней
+                            </li>
+                            <li style="padding: 15px 0; padding-left: 40px; position: relative; font-size: 18px; color: #ddd;">
+                                <span style="position: absolute; left: 0; font-size: 24px; color: var(--neon-green);">✓</span>
+                                Автоматическая квалификация и передача горячих лидов менеджерам
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div style="background: rgba(0, 255, 159, 0.1); padding: 30px; border-radius: 15px; border-left: 4px solid var(--neon-green); margin: 40px 0;">
+                        <p style="font-size: 20px; color: var(--neon-green); font-weight: 700; margin-bottom: 15px;">
+                            Результаты технологии:
+                        </p>
+                        <p style="font-size: 18px; color: #ddd; line-height: 1.8;">
+                            <strong>3-5 тысяч лидов в день</strong> • Конверсия в продажу <strong>15-20%</strong> • ROI <strong>200-500%</strong> • Работает в Telegram, Threads, Instagram, TikTok
+                        </p>
+                    </div>
+
+                    <p style="font-size: 20px; color: #ccc; margin-bottom: 40px;">
+                        Эта технология уже приносит миллионы рублей моим клиентам. Хотите узнать больше?
+                    </p>
+
+                    <button class="btn btn-primary" style="font-size: 22px; padding: 20px 60px; margin-bottom: 20px;" onclick="window.open('https://deniszestokov-cyber.github.io/plazma-marketing/', '_blank')">
+                        Узнать подробнее о технологии
+                    </button>
+                    
+                    <p style="color: #888; font-size: 16px; margin-top: 20px;">
+                        Полное описание, кейсы и демонстрация работы системы
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Финальный CTA -->
+    <section class="final-cta">
+        <div class="container">
+            <h2>Готов начать прямо сейчас</h2>
+            
+            <div class="about-content glass-card" style="max-width: 1000px; margin: 40px auto; text-align: left;">
+                <p class="about-text">
+                    У меня <strong>более 7 лет опыта в продажах и маркетинге</strong>. Работал с продуктами с высоким чеком, в том числе с франшизами и инвестиционными предложениями. Основная модель продаж — через квалификацию клиента, телефонный разговор и проведение презентаций в Zoom.
+                </p>
+                <p class="about-text">
+                    Личные показатели продаж составляли в среднем <strong>5–8 млн рублей в месяц</strong>, а оборот отдела под моим управлением доходил до <strong>50–80 млн рублей в месяц</strong>. Руководил отделом из <strong>30 менеджеров по продажам</strong>, занимался выстраиванием воронок, скриптов, контролем конверсии и обучением сотрудников.
+                </p>
+                <p class="about-text">
+                    Также у меня сильный маркетинговый бэкграунд — <strong>более 7 лет в digital-маркетинге</strong>. Работал с рекламными кабинетами Яндекс, VK, Google, Facebook, Instagram, TikTok, управлял рекламными бюджетами до <strong>50–150 тыс. долларов в месяц</strong>, что дало глубокое понимание источников трафика, поведения клиентов и воронок продаж.
+                </p>
+                
+                <div style="margin: 40px 0; padding: 30px; background: rgba(138, 43, 226, 0.1); border-left: 4px solid var(--electric-purple); border-radius: 10px;">
+                    <p class="about-text" style="margin-bottom: 20px;">
+                        <strong style="color: var(--neon-green); font-size: 22px;">Формат сотрудничества:</strong>
+                    </p>
+                    <p class="about-text">
+                        Я ценю свое время и считаю, что время — это один из самых ценных ресурсов, поэтому работа специалиста должна оплачиваться вне зависимости от KPI или результата продаж.
+                    </p>
+                    <p class="about-text">
+                        Рассматриваю формат:
+                    </p>
+                    <ul style="list-style: none; padding: 0; margin: 20px 0;">
+                        <li style="padding: 15px 0; padding-left: 30px; position: relative; font-size: 20px; color: var(--neon-green);">
+                            <span style="position: absolute; left: 0; font-size: 24px;">✓</span>
+                            <strong>Фиксированная часть — 150 000 ₽ в месяц</strong><br>
+                            <span style="font-size: 16px; color: #ccc;">(гарантированная оплата за рабочее время, без привязки к продажам)</span>
+                        </li>
+                        <li style="padding: 15px 0; padding-left: 30px; position: relative; font-size: 20px; color: var(--bright-orange);">
+                            <span style="position: absolute; left: 0; font-size: 24px;">✓</span>
+                            <strong>+ процент с продаж (от 10-15%)</strong><br>
+                            <span style="font-size: 16px; color: #ccc;">(мотивация на результат и масштабирование)</span>
+                        </li>
+                    </ul>
+                    <p class="about-text">
+                        В таком формате можно выстроить <strong>долгосрочное и эффективное сотрудничество</strong>.
+                    </p>
+                </div>
+                
+                <p class="about-text" style="text-align: center; font-size: 22px; color: var(--neon-green); margin-top: 40px;">
+                    Если вам подходит такой формат, буду рад обсудить детали и задачи по вакансии.
+                </p>
+            </div>
+            
+            <div class="hero-buttons" style="margin-top: 50px;">
+                <button class="btn btn-primary" onclick="window.open('https://wa.me/79950415017', '_blank')">Написать в WhatsApp</button>
+                <button class="btn btn-secondary" onclick="window.open('https://t.me/Aurra007', '_blank')">Написать в Telegram</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Создание звёзд
+        function createStars() {
+            const starsContainer = document.getElementById('stars');
+            const numberOfStars = 300;
+            
+            for (let i = 0; i < numberOfStars; i++) {
+                const star = document.createElement('div');
+                star.className = 'star';
+                star.style.left = Math.random() * 100 + '%';
+                star.style.top = Math.random() * 100 + '%';
+                star.style.animationDelay = Math.random() * 3 + 's';
+                starsContainer.appendChild(star);
+            }
+        }
+
+        // Создание космического canvas с частицами
+        function createSpaceCanvas() {
+            const canvas = document.getElementById('space-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            
+            const particles = [];
+            const particleCount = 150;
+            
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 3;
+                    this.speedX = (Math.random() - 0.5) * 0.5;
+                    this.speedY = (Math.random() - 0.5) * 0.5;
+                    
+                    const colors = ['#8A2BE2', '#00FF9F', '#FF6B00'];
+                    this.color = colors[Math.floor(Math.random() * colors.length)];
+                }
+                
+                update() {
+                    this.x += this.speedX;
+                    this.y += this.speedY;
+                    
+                    if (this.x > canvas.width) this.x = 0;
+                    if (this.x < 0) this.x = canvas.width;
+                    if (this.y > canvas.height) this.y = 0;
+                    if (this.y < 0) this.y = canvas.height;
+                }
+                
+                draw() {
+                    ctx.fillStyle = this.color;
+                    ctx.shadowBlur = 10;
+                    ctx.shadowColor = this.color;
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                
+                particles.forEach(particle => {
+                    particle.update();
+                    particle.draw();
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            window.addEventListener('resize', () => {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            });
+        }
+
+        // Плавный скролл к секции
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Анимация появления секций при скролле
+        function handleScrollAnimations() {
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, {
+                threshold: 0.1
+            });
+            
+            sections.forEach(section => {
+                section.style.opacity = '0';
+                section.style.transform = 'translateY(50px)';
+                section.style.transition = 'all 1s ease-out';
+                observer.observe(section);
+            });
+        }
+
+        // Parallax эффект
+        function handleParallax() {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const hero = document.querySelector('.hero');
+                if (hero) {
+                    hero.style.transform = `translateY(${scrolled * 0.5}px)`;
+                }
+            });
+        }
+
+        // Инициализация
+        function init() {
+            createStars();
+            createSpaceCanvas();
+            handleScrollAnimations();
+            handleParallax();
+        }
+
+        // Запуск при загрузке страницы
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+
+        // Экспорт функции для кнопок
+        window.scrollToSection = scrollToSection;
+    </script>
+</body>
+</html>
